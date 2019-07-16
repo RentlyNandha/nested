@@ -1,0 +1,30 @@
+<%= form_with(model: show, local: true) do |form| %>
+  <% if show.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(show.errors.count, "error") %> prohibited this show from being saved:</h2>
+
+      <ul>
+      <% show.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+   
+    <%= form.fields_for :questions do |s| %>
+    <%= s.label :Question %>
+    <%= s.text_area :content %>
+    <%= s.label :Answers%>
+    <%= s.fields_for :answers do |a|%>
+    <%=a.text_field :value %><br>
+    <%end%>
+  <% end %>
+
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
